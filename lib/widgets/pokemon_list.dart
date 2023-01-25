@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:work_with_api/widgets/poke_list_item.dart';
+
 import '../data/poke_service.dart';
 import '../model/pokemon.dart';
 
@@ -24,20 +26,14 @@ class _PokemonListState extends State<PokemonList> {
       future: pokeList,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return ListView.builder(
-              itemCount: snapshot.data?.length,
-              itemBuilder: (context, index) {
-                final data = snapshot.data![index];
-                return Material(
-                  child: SizedBox(
-                    height: 100,
-                    width: 200,
-                    child: Column(
-                      children: [Text(data.avgSpawns.toString())],
-                    ),
-                  ),
-                );
-              });
+          return GridView.builder(
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            itemBuilder: (BuildContext context, int index) {
+              final item = snapshot.data![index];
+              return PokeListItem(pokemonModel: item);
+            },
+          );
         } else if (snapshot.hasError) {
           return Text(snapshot.hasData.toString());
         } else {
