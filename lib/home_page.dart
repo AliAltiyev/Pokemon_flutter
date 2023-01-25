@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:work_with_api/data/poke_service.dart';
+import 'package:work_with_api/widgets/appbar.dart';
+import 'package:work_with_api/widgets/pokemon_list.dart';
 
 import 'model/pokemon.dart';
 
@@ -15,7 +17,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     pokeList = PokeService.getPokemons();
   }
@@ -23,30 +24,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder(
-        future: pokeList,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-                itemCount: snapshot.data?.length,
-                itemBuilder: (context, index) {
-              final data = snapshot.data![index];
-              return Material(
-                child: SizedBox(
-                  height: 100,
-                  width: 200,
-                  child: Column(
-                    children: [Text(data.avgSpawns.toString())],
-                  ),
-                ),
-              );
-            });
-          } else if (snapshot.hasError) {
-            return  Text(snapshot.hasData.toString());
-          } else {
-            return const CircularProgressIndicator();
-          }
-        },
+      body: Column(
+        children: const [
+          ApplicationAppBar(),
+          Expanded(child: PokemonList()),
+        ],
       ),
     );
   }
