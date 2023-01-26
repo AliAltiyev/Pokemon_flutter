@@ -39,7 +39,7 @@ class _PokemonListState extends State<PokemonList> {
         } else if (snapshot.hasError) {
           return Text(snapshot.hasData.toString());
         } else {
-          return const CircularProgressIndicator();
+          return const CircularProgressIndicator(strokeWidth: 10,color: Colors.deepPurple,);
         }
       },
     );
