@@ -15,4 +15,12 @@ class Constants {
     );
   }
 
+  static TextStyle pokemonNameTextStyle() {
+    return const TextStyle(
+        color: Colors.white,
+        fontSize: 26,
+        fontWeight: FontWeight.w600
+    );
+  }
+
 }
